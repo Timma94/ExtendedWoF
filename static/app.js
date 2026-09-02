@@ -135,6 +135,19 @@ async function loadHistory() {
         }
 
 
+        let undoButton = "";
+
+
+        if (item.status === "Executed") {
+
+            undoButton = `
+                <button onclick="undoTask('${item.occurrence_id}')">
+                    Undo
+                </button>
+            `;
+        }
+
+
         div.innerHTML = `
 
             <strong>${item.occurrence_id}</strong>
@@ -151,9 +164,7 @@ async function loadHistory() {
 
             <br>
 
-            <button onclick="undoTask('${item.occurrence_id}')">
-                Undo
-            </button>
+            ${undoButton}
         `;
 
 
@@ -205,7 +216,10 @@ async function executeTask(occurrenceId) {
 
         const result = await response.json();
 
-        alert(result.detail);
+        alert(
+            result.detail ||
+            "Something went wrong."
+        );
 
         return;
     }
@@ -245,7 +259,10 @@ async function undoTask(occurrenceId) {
 
         const result = await response.json();
 
-        alert(result.detail);
+        alert(
+            result.detail ||
+            "Something went wrong."
+        );
 
         return;
     }
@@ -372,7 +389,10 @@ async function applyLockTime() {
 
     if (!response.ok) {
 
-        alert(result.detail);
+        alert(
+            result.detail ||
+            "Something went wrong."
+        );
 
         return;
     }
@@ -392,7 +412,6 @@ async function applyLockTime() {
 }
 
 
-```javascript
 // ============================================================
 // NEW TASK
 // ============================================================
@@ -486,6 +505,7 @@ async function applyNewTask() {
     await loadData();
 }
 
+
 // ============================================================
 // TEST EVENT
 // ============================================================
@@ -543,7 +563,8 @@ async function sendTestEvent() {
     if (!response.ok) {
 
         alert(
-            data.detail || "Something went wrong."
+            data.detail ||
+            "Something went wrong."
         );
 
         return;
