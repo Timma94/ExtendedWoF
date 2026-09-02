@@ -234,7 +234,7 @@ async function undoTask(occurrenceId) {
 
     const response =
         await fetch(
-            `/api/occurrences/${occurrenceId}/undo`,
+            `/api/occurrences/${encodeURIComponent(occurrenceId)}/undo`,
             {
                 method: "POST"
             }
@@ -352,7 +352,7 @@ async function applyLockTime() {
 
     const response =
         await fetch(
-            `/api/occurrences/${selectedOccurrence}/punishment`,
+            `/api/occurrences/${encodeURIComponent(selectedOccurrence)}/punishment`,
             {
                 method: "POST",
 
