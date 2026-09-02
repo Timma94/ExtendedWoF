@@ -98,9 +98,32 @@
             Increase Lock Time
         </button>
 
-        <button onclick="applyNewTask()">
-            Initiate New Task
-        </button>
+<div id="newTaskInput" style="display: none; margin-top: 20px;">
+
+    <h3>New Task</h3>
+
+    <p>
+        Describe the new task that must be performed.
+    </p>
+
+    <textarea
+        id="newTaskName"
+        rows="4"
+        style="width: 100%; box-sizing: border-box;"
+        placeholder="Enter the new task..."
+    ></textarea>
+
+    <br>
+
+    <button onclick="applyNewTask()">
+        Create New Task
+    </button>
+
+</div>
+
+<button onclick="showNewTask()">
+    Initiate New Task
+</button>
 
         <button onclick="closePunishment()">
             Cancel
