@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Extended Wheel of Fortune</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<header>
+    <h1>Extended Wheel of Fortune</h1>
+    <p>Task Manager V1</p>
+</header>
+
+
+<main>
+
+    <!-- ACTIVE TASKS -->
+
+    <section>
+
+        <h2>Active Tasks</h2>
+
+        <div id="activeTasks">
+            Loading...
+        </div>
+
+    </section>
+
+
+    <!-- TEST WHEEL -->
+
+    <section>
+
+        <h2>Test Wheel Event</h2>
+
+        <p>
+            This section temporarily simulates a result from Chastify.
+            We will replace this with the game.js connection later.
+        </p>
+
+        <select id="testResult">
+
+            <option value="Kriebelen Tim naar keuze">
+                Kriebelen Tim naar keuze
+            </option>
+
+            <option value="Toevoegen 3 uur">
+                Toevoegen 3 uur
+            </option>
+
+            <option value="Punishment">
+                Punishment
+            </option>
+
+        </select>
+
+        <button onclick="sendTestEvent()">
+            Simulate Wheel Spin
+        </button>
+
+    </section>
+
+
+    <!-- HISTORY -->
+
+    <section>
+
+        <h2>History</h2>
+
+        <div id="history">
+            Loading...
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- PUNISHMENT MODAL -->
+
+<div id="punishmentModal" class="modal">
+
+    <div class="modal-content">
+
+        <h2>Punishment</h2>
+
+        <p>
+            What should happen?
+        </p>
+
+        <button onclick="showLockTime()">
+            Increase Lock Time
+        </button>
+
+        <button onclick="applyNewTask()">
+            Initiate New Task
+        </button>
+
+        <button onclick="closePunishment()">
+            Cancel
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- LOCK TIME MODAL -->
+
+<div id="lockTimeModal" class="modal">
+
+    <div class="modal-content">
+
+        <h2>Lock Time Punishment</h2>
+
+
+        <h3>Minimum</h3>
+
+        <div class="time-selector">
+
+            <input
+                id="minDays"
+                type="number"
+                value="0"
+                min="0"
+                max="99"
+            >
+
+            <span>Days</span>
+
+
+            <input
+                id="minHours"
+                type="number"
+                value="0"
+                min="0"
+                max="23"
+            >
+
+            <span>Hours</span>
+
+
+            <input
+                id="minMinutes"
+                type="number"
+                value="30"
+                min="0"
+                max="59"
+            >
+
+            <span>Minutes</span>
+
+        </div>
+
+
+        <h3>Maximum</h3>
+
+        <div class="time-selector">
+
+            <input
+                id="maxDays"
+                type="number"
+                value="2"
+                min="0"
+                max="99"
+            >
+
+            <span>Days</span>
+
+
+            <input
+                id="maxHours"
+                type="number"
+                value="12"
+                min="0"
+                max="23"
+            >
+
+            <span>Hours</span>
+
+
+            <input
+                id="maxMinutes"
+                type="number"
+                value="0"
+                min="0"
+                max="59"
+            >
+
+            <span>Minutes</span>
+
+        </div>
+
+
+        <button onclick="applyLockTime()">
+            Apply Punishment
+        </button>
+
+        <button onclick="closeLockTime()">
+            Cancel
+        </button>
+
+    </div>
+
+</div>
+
+
+<script src="/static/app.js"></script>
+
+</body>
+
+</html>
