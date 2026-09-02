@@ -392,15 +392,44 @@ async function applyLockTime() {
 }
 
 
+```javascript
 // ============================================================
 // NEW TASK
 // ============================================================
 
+function showNewTask() {
+
+    document.getElementById(
+        "newTaskInput"
+    ).style.display = "block";
+
+    document.getElementById(
+        "newTaskName"
+    ).focus();
+}
+
+
 async function applyNewTask() {
+
+    const taskName =
+        document.getElementById(
+            "newTaskName"
+        ).value.trim();
+
+
+    if (!taskName) {
+
+        alert(
+            "Please enter a new task."
+        );
+
+        return;
+    }
+
 
     const response =
         await fetch(
-            `/api/occurrences/${selectedOccurrence}/punishment`,
+            `/api/occurrences/${encodeURIComponent(selectedOccurrence)}/punishment`,
             {
                 method: "POST",
 
@@ -410,8 +439,12 @@ async function applyNewTask() {
                 },
 
                 body: JSON.stringify({
+
                     punishment_type:
-                        "New Task"
+                        "New Task",
+
+                    new_task_name:
+                        taskName
                 })
             }
         );
@@ -423,17 +456,36 @@ async function applyNewTask() {
 
     if (!response.ok) {
 
-        alert(result.detail);
+        alert(
+            result.detail ||
+            "Something went wrong."
+        );
 
         return;
     }
+
+
+    alert(
+        `New task created:\n\n` +
+        `${result.new_occurrence_id} - ` +
+        `${result.new_task_name}`
+    );
+
+
+    document.getElementById(
+        "newTaskName"
+    ).value = "";
+
+    document.getElementById(
+        "newTaskInput"
+    ).style.display = "none";
 
 
     closePunishment();
 
     await loadData();
 }
-
+```
 
 // ============================================================
 // TEST EVENT
