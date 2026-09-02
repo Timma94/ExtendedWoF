@@ -485,7 +485,6 @@ async function applyNewTask() {
 
     await loadData();
 }
-```
 
 // ============================================================
 // TEST EVENT
