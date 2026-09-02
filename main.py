@@ -68,6 +68,8 @@ class ResultCreate(BaseModel):
 class PunishmentRequest(BaseModel):
     punishment_type: str
 
+    new_task_name: str | None = None
+
     minimum_days: int = 0
     minimum_hours: int = 0
     minimum_minutes: int = 0
