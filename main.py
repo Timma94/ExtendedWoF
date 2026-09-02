@@ -368,17 +368,36 @@ def apply_punishment(
     # NEW TASK PUNISHMENT
     # --------------------------------------------------------
 
-    if punishment.punishment_type == "New Task":
+if punishment.punishment_type == "New Task":
 
-        occurrence.punishment_type = "New Task"
-        occurrence.status = "Punishment"
+    if not punishment.new_task_name:
+        raise HTTPException(
+            status_code=400,
+            detail="New task name is required."
+        )
 
-        db.commit()
+    occurrence.punishment_type = "New Task"
+    occurrence.status = "Punishment"
 
-        return {
-            "success": True,
-            "punishment_type": "New Task"
-        }
+    new_occurrence_id = generate_occurrence_id(db)
+
+    new_occurrence = Occurrence(
+        occurrence_id=new_occurrence_id,
+        result_id="CUSTOM",
+        result_name=punishment.new_task_name,
+        created_datetime=datetime.now(),
+        status="Pending"
+    )
+
+    db.add(new_occurrence)
+    db.commit()
+
+    return {
+        "success": True,
+        "punishment_type": "New Task",
+        "new_occurrence_id": new_occurrence_id,
+        "new_task_name": punishment.new_task_name
+    }
 
 
     raise HTTPException(
