@@ -194,7 +194,7 @@ async function executeTask(occurrenceId) {
 
     const response =
         await fetch(
-            `/api/occurrences/${occurrenceId}/execute`,
+            `/api/occurrences/${encodeURIComponent(occurrenceId)}/execute`,
             {
                 method: "POST"
             }
